@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Breakdown Calculator</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
+        }
+        .result {
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1em;
+        }
+        .result-item span {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center mb-4">Salary Breakdown Calculator</h2>
+    <form id="salaryForm">
+        <div class="form-group">
+            <label for="grossSalary">Enter Gross Salary:</label>
+            <input type="number" class="form-control" id="grossSalary" placeholder="Enter gross salary" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+    </form>
+    
+    <div id="result" class="result" style="display: none;">
+        <div class="result-item"><span>Basic (50%):</span><span id="basic"></span></div>
+        <div class="result-item"><span>HRA (20%):</span><span id="hra"></span></div>
+        <div class="result-item"><span>CA (5.81%):</span><span id="ca"></span></div>
+        <div class="result-item"><span>MA (4.83%):</span><span id="ma"></span></div>
+        <div class="result-item"><span>SA (12.47%):</span><span id="sa"></span></div>
+        <div class="result-item"><span>OA (6.88%):</span><span id="oa"></span></div>
+        <div class="result-item"><span>Gross Salary (100%):</span><span id="gross"></span></div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('salaryForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const grossSalary = parseFloat(document.getElementById('grossSalary').value);
+        if (isNaN(grossSalary) || grossSalary <= 0) {
+            alert("Please enter a valid positive number for the gross salary.");
+            return;
+        }
+
+        document.getElementById('basic').textContent = (grossSalary * 0.5).toFixed(2);
+        document.getElementById('hra').textContent = (grossSalary * 0.2).toFixed(2);
+        document.getElementById('ca').textContent = (grossSalary * 0.0581).toFixed(2);
+        document.getElementById('ma').textContent = (grossSalary * 0.0483).toFixed(2);
+        document.getElementById('sa').textContent = (grossSalary * 0.1247).toFixed(2);
+        document.getElementById('oa').textContent = (grossSalary * 0.0688).toFixed(2);
+        document.getElementById('gross').textContent = grossSalary.toFixed(2);
+
+        document.getElementById('result').style.display = 'block';
+    });
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>
